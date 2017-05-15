@@ -19,6 +19,7 @@ import {
 import {connect} from 'react-redux';
 import TabNavigator from 'react-native-tab-navigator'; //引入导航
 import Home from '../Home/XMGhome';
+import Home2 from '../Home/XMGhome2';
 import Message from '../Message/XMGMessage';
 import Mypage from '../Mypage/XMGMypage';
 import Collection from '../Collection/XMGCollection';
@@ -68,7 +69,7 @@ class Main extends Component{
           >
 
             <Navigator
-              initialRoute = {{name:'首页', component:AgencyPage2}}
+              initialRoute = {{name:'首页', component:Home2}}
               configureScene = {()=>{
                 return Navigator.SceneConfigs.PushFromRight;
               }}
