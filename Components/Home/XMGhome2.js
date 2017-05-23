@@ -15,6 +15,7 @@ import {
   Button,
 } from 'react-native';
 
+import { StackNavigator } from 'react-navigation';
 import {connect} from 'react-redux'
 import HomeDetail from './XMGHomeDetail'
 import {fetchAgency} from '../actions/AgencyAction'
@@ -31,6 +32,10 @@ const styles = StyleSheet.create({
 });
 
  class Home2 extends Component {
+
+  static navigationOptions = {
+    title: '首页',
+  };
 
   render() {
 
@@ -77,6 +82,7 @@ const styles = StyleSheet.create({
   }
 
 }
+
 
 //输出组件类
 module.exports = Home2;

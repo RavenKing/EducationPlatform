@@ -16,6 +16,7 @@ import {
   TextInput,
 } from 'react-native';
 
+import { StackNavigator } from 'react-navigation';
 import {connect} from 'react-redux';
 import TabNavigator from 'react-native-tab-navigator'; //引入导航
 import Home from '../Home/XMGhome';
