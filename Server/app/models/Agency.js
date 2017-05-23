@@ -10,7 +10,14 @@ var Agency = new Schema({
     creation_date:{type:Date,default:Date.now},
     basic_info:[Schema.Types.Mixed],
     contact_person:String,
-    contact_number:Number
+    contact_number:Number,
+    address:String,
+    contact_email:String,
+    attachments:[{type:String,url:String}], // type = photos , logo, zhaosheng jianzhang 
+    father_agency:String,
+    subagency:[String],
+    activities:[Schema.Types.Mixed]
+
 })
 
 module.exports=mongoose.model('Agency',Agency,'Agencys');
