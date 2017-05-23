@@ -12,9 +12,8 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  Button,
 } from 'react-native';
-
+import Button from 'antd-mobile/lib/button';
 import {connect} from 'react-redux'
 import HomeDetail from './XMGHomeDetail'
 import {fetchAgency} from '../actions/AgencyAction'
@@ -68,7 +67,9 @@ const styles = StyleSheet.create({
 
       
           </Text>
-      
+          <Button type ='primary'> 
+          dianwo ya 
+          </Button>
            <TextInput  style={{height: 40, width :100}}
           placeholder="Type here to translate!"
         onChangeText={(text) => this.setState({text})}>

@@ -11,6 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
+import Button from 'antd-mobile/lib/button';
 
 export default class Mypage extends Component {
   render() {
@@ -19,7 +20,7 @@ export default class Mypage extends Component {
         <Text style={styles.welcome}>
           My Page
         </Text>
-
+        <Button size='small' type='primary'> 点我 </Button>
       </View>
     );
   }

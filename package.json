@@ -7,8 +7,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "antd": "^2.10.0",
+    "antd-mobile": "^1.1.2",
     "axios": "^0.16.1",
     "react": "15.2.1",
+    "react-dom": "^15.5.4",
     "react-native": "0.31.0",
     "react-native-swiper": "^1.5.4",
     "react-native-swiper2": "^2.0.7",
@@ -19,6 +22,7 @@
   },
   "devDependencies": {
     "babel-jest": "19.0.0",
+    "babel-plugin-import": "^1.1.1",
     "babel-preset-react-native": "1.9.1",
     "jest": "19.0.2"
   },
