@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
+import { TabNavigator } from "react-navigation";
 import {connect} from 'react-redux'
 import HomeDetail from './XMGHomeDetail'
 import {fetchAgency} from '../actions/AgencyAction'
@@ -33,9 +34,10 @@ const styles = StyleSheet.create({
 
  class Home2 extends Component {
 
-  static navigationOptions = {
-    title: '首页',
+static navigationOptions = {
+    tabBarLabel: 'Home2',
   };
+
 
   render() {
 

@@ -12,19 +12,16 @@ import {
   View,
   Image,
   Platform, //判断当前的系统
-  Navigator,
   TextInput,
 } from 'react-native';
 
 import { StackNavigator } from 'react-navigation';
 import {connect} from 'react-redux';
 import TabNavigator from 'react-native-tab-navigator'; //引入导航
-import Home from '../Home/XMGhome';
 import Home2 from '../Home/XMGhome2';
 import Message from '../Message/XMGMessage';
 import Mypage from '../Mypage/XMGMypage';
 import Collection from '../Collection/XMGCollection';
-import AgencyPage2 from '../../AgencyPageBackup2'
 
 import {fetchAgency} from '../actions/AgencyAction';
 
