@@ -11,18 +11,13 @@ import {
   Text,
   View
 } from 'react-native';
-import Button from 'antd-mobile/lib/button';
-import InputItem from 'antd-mobile/lib/input-item';
 
 export default class Mypage extends Component {
   render() {
     return (
       <View style={styles.container}>
-              <InputItem size='small' label="good"  type = "phone "placeholder="shit" title="nice"/>
-              <Text>shwt</Text><InputItem size='small' label="good"  type = "phone "placeholder="shit" title="nice"/>
-              <InputItem size='small' label="good"  type = "phone "placeholder="shit" title="nice"/>
-               <Button size='small' type='primary'> 点我 </Button>
-      </View>
+              <Text>shwt</Text> 
+       </View>
     );
   }
 }
