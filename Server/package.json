@@ -5,10 +5,10 @@
   "dependencies": {
     "body-parser": "~1.4.2",
     "bson": "^1.0.4",
-    "express": "~4.5.1",
+    "express": "^4.5.1",
     "method-override": "~2.0.2",
     "mongodb": "^2.2.27",
-    "mongoose": "^4.9.3",
+    "mongoose": "^4.10.4",
     "swig": "^1.4.2"
   }
 }

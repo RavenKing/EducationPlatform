@@ -19,11 +19,9 @@ export default function loginIn(state = initialState, action) {
     case "LOGGIN": // 正在登录
     {
      
-
-
+     console.log(action.payload)
       return Object.assign({}, state, {
-          activitys:[1,2,3,4,5],
-        user: action.payload[0].name
+        user: action.payload[0].agency_name
       });
     }
     case "FINISHED": // 登录完成
