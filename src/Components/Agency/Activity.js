@@ -212,8 +212,6 @@ export default class Activity extends Component {
                 <TouchableOpacity
                     onPress={
                         () => {
-
-                                    console.log(thes.popupDialog);
                             thes.popupDialog.show();}
                     }
                 >
@@ -428,7 +426,7 @@ export default class Activity extends Component {
             </ScrollView>
             
             
-            {/*---报名栏---*/}
+            {/*-------------------------------报名栏------------------------------------*/}
             <View style={styles.bigRegistryFrameStyle}>
 
                 {/*---------------------------阴影线------------------------------*/}
@@ -480,51 +478,51 @@ export default class Activity extends Component {
 
             </View> 
 
-        <PopupDialog
-          ref={(popupDialog) => { this.popupDialog = popupDialog; }}
-          dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom'})}
-          animationDuration = {200}
-          overlayOpacity = {0.4}
-          dialogStyle={{
-            borderRadius:0,
-            height:ScreenHeight*0.3,
-            //marginBottom:-(ScreenHeight*0.66-ScreenHeight*0.3),
-            alignItems:'center',
-          }}
-        >
-
-          <View
-            style={{
-              width:ScreenWidth*0.9,
-              //backgroundColor:'red',
-              marginTop:20
-            }}
-          >
-            <View
-            style={{
-              flexDirection:'row',
-              justifyContent:'space-between',
-            }}
+            <PopupDialog
+              ref={(popupDialog) => { this.popupDialog = popupDialog; }}
+              dialogAnimation = { new SlideAnimation({ slideFrom: 'bottom'})}
+              animationDuration = {200}
+              overlayOpacity = {0.4}
+              dialogStyle={{
+                borderRadius:0,
+                height:ScreenHeight*0.3,
+                //marginBottom:-(ScreenHeight*0.66-ScreenHeight*0.3),
+                alignItems:'center',
+              }}
             >
 
-                <Text
-                  style={{
-                    fontSize:16,
-                  }}
-                >选择一个收藏夹
-                </Text>
+                <View
+                    style={{
+                      width:ScreenWidth*0.9,
+                      //backgroundColor:'red',
+                      marginTop:20
+                    }}
+                  >
+                    <View
+                    style={{
+                      flexDirection:'row',
+                      justifyContent:'space-between',
+                    }}
+                    >
 
-                <Image 
-                  source={require('../../../img/Buttons/plus.png')}
-                  style={{
-                    height:16,
-                    width:16,
-                  }}
-                />
+                        <Text
+                          style={{
+                            fontSize:16,
+                          }}
+                        >选择一个收藏夹
+                        </Text>
 
-            </View>
-        </View>
-        </PopupDialog>   
+                        <Image 
+                          source={require('../../../img/Buttons/plus.png')}
+                          style={{
+                            height:16,
+                            width:16,
+                          }}
+                        />
+
+                    </View>
+                </View>
+            </PopupDialog>   
 	     </View>
     );
   }

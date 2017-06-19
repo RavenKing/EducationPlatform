@@ -34,6 +34,12 @@ import AgencyPage1 from '../Agency/AgencyPage1.js'
 import AgencyPage2 from '../Agency/AgencyPage2.js'
 import Activity from '../Agency/Activity.js'
 
+import TeacherPage from '../Teacher/TeacherPage' 
+
+/*---------------导航测试页--------------------*/
+import Thome from '../Teacher/Home/Home.js' 
+import Tmessage from '../Teacher/Message/Message.js' 
+
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
@@ -278,9 +284,14 @@ static navigationOptions = {
                 补习精选
               </Text>
 
-              <Text style={styles.moretitleStyle}>
-                查看更多>
-              </Text>
+              <TouchableOpacity
+                onPress={() => navigate('Thome')}
+              >
+                <Text style={styles.moretitleStyle}>
+                  查看更多>
+                </Text>
+              </TouchableOpacity>
+
             </View>
               <ListView
                 dataSource={this.state.tutorings}
@@ -336,12 +347,22 @@ const TabbarNavigator = TabNavigator({
   }
 );
 
+const TeacherTab = TabNavigator({
+    Home: { screen: Thome },
+    Message: { screen: Tmessage },
+  }, 
+  {
+    initialRouteName: 'Home'
+  },
+);
 
 const AppNav = StackNavigator({
   Home: { screen: TabbarNavigator },
   AgencyPage1:{screen: AgencyPage1},
   AgencyPage2:{screen: AgencyPage2},
   Activity:{screen: Activity},
+  TeacherPage:{screen:TeacherPage},
+  Thome:{ screen: TeacherTab },
 });
 
 

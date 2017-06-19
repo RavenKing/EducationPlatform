@@ -9,16 +9,31 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity,
 } from 'react-native';
 
-export default class Message extends Component {
+var Dimensions = require('Dimensions');
+var ScreenWidth = Dimensions.get('window').width;
+var ScreenHeight = Dimensions.get('window').height;
+
+
+export default class Thome extends Component {
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
+        <TouchableOpacity
+          onPress={() => navigate('Thome')}
+        >
+          <Text style={styles.welcome}>
           Message
         </Text>
+        </TouchableOpacity>
+        <View style = {styles.test1}>
+          <Text style={{backgroundColor:'yellow'}}>hahahh</Text>
+        </View>
+
 
       </View>
     );
@@ -32,7 +47,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+  test1:{
+    width:ScreenWidth*0.8,
+    backgroundColor:'red',
+  }
 });
 
 //输出组件类
-module.exports = Message;
+module.exports = Thome;
