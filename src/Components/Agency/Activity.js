@@ -338,21 +338,21 @@ export default class Activity extends Component {
                         </View>                        
 
                         <View style={styles.mainInfoRowFrameStyle}>
-                            <Image source={require('../../../img/actIcon/appointment.png')} style={styles.mainInfoIconStyle}/>
+                            <Image source={require('../../../img/ActiIcon/appointment.png')} style={styles.mainInfoIconStyle}/>
                             <Text style={styles.mainInfoTextStyle}>2017年5月14——2017年5月24</Text>
                         </View>
 
                         <View style={styles.mainInfoRowFrameStyle}>
-                            <Image source={require('../../../img/actIcon/time.png')} style={styles.mainInfoIconStyle}/>
+                            <Image source={require('../../../img/ActiIcon/time.png')} style={styles.mainInfoIconStyle}/>
                             <Text style={styles.mainInfoTextStyle}>7天封闭寄宿制</Text>
                         </View>
 
                         <View style={styles.mainInfoRowFrameStyle}>
-                            <Image source={require('../../../img/actIcon/page.png')} style={styles.mainInfoIconStyle}/>
+                            <Image source={require('../../../img/ActiIcon/page.png')} style={styles.mainInfoIconStyle}/>
                             <Text style={styles.mainInfoTextStyle}>提供3餐以及住宿，不包含来回交通</Text>
                         </View>
                         <View style={styles.mainInfoRowFrameStyle}>
-                            <Image source={require('../../../img/actIcon/dialogue.png')} style={styles.mainInfoIconStyle}/>
+                            <Image source={require('../../../img/ActiIcon/dialogue.png')} style={styles.mainInfoIconStyle}/>
                             <Text style={styles.mainInfoTextStyle}>提供全英语语言环境</Text>
                         </View>
                     </View>
@@ -430,7 +430,7 @@ export default class Activity extends Component {
             <View style={styles.bigRegistryFrameStyle}>
 
                 {/*---------------------------阴影线------------------------------*/}
-                <Image source={require('../../../img/shawdo3.png')} style={{width:ScreenWidth,height:5}}/>
+                <Image source={require('../../../img/shadow_top.png')} style={{width:ScreenWidth,height:5}}/>
 
                 <View 
                     style={styles.innerRegistryFrameStyle}>

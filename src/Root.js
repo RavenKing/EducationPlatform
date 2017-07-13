@@ -3,7 +3,6 @@ import {Provider,connect} from 'react-redux';
 import configureStore from './store/Store';
 import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
-import AppNavigator from './router/index2';
 
 const store = configureStore();
 

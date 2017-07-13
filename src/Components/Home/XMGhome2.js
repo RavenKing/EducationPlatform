@@ -17,28 +17,34 @@ import {
   ListView,
   Image,
   ScrollView,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import StarRating from 'react-native-star-rating';
 
+import Swiper from 'react-native-swiper2';
+
 import {connect} from 'react-redux'
 import HomeDetail from './XMGHomeDetail'
 import {fetchAgency} from '../../actions/AgencyAction'
 
-import Collection from '../Collection/XMGCollection.js'
+import AgencyCollection from '../Collection/AgencyCollection.js'
+import ActivityCollection from '../Collection/ActivityCollection.js'
+
+
 import Message from '../Message/XMGMessage.js' 
 import Mypage from '../Mypage/XMGMypage.js' 
 
-import AgencyPage1 from '../Agency/AgencyPage1.js' 
-import AgencyPage2 from '../Agency/AgencyPage2.js'
+
+
+import AgencyPage from '../Agency/AgencyPage.js'
 import Activity from '../Agency/Activity.js'
+import Activity2 from '../Agency/Activity2.js'
+import Contacts from '../Agency/Contacts.js'
+import SearchPage from '../Search/SearchPage.js'
 
-import TeacherPage from '../Teacher/TeacherPage' 
 
-/*---------------导航测试页--------------------*/
-import Thome from '../Teacher/Home/Home.js' 
-import Tmessage from '../Teacher/Message/Message.js' 
 
 var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
@@ -75,15 +81,19 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     flexDirection:'row',
   },
-
+/*-------------------图片-----------------------*/
+  swiperPicStyle: {
+    width: ScreenWidth,
+    height:ScreenWidth/16*9,
+  },
 /*------------------------文本Style-------------------------*/
 
   titleStyle:{
-    fontSize:16,
+    fontSize:18,
   },
 
   moretitleStyle:{
-    fontSize:11,
+    fontSize:13,
     color:'#707070',
     marginRight:ScreenWidth*0.025,
   },
@@ -118,10 +128,48 @@ var activity_URLS = [
 
 class Home2 extends Component {
 
+
 static navigationOptions = {
     tabBarLabel: 'Home',
-    headerStyle:{backgroundColor:'white'}
+    headerStyle:{backgroundColor:'white'},
+    headerRight:
+            <View
+                style={{flexDirection:'row'}}
+            >
+                <TouchableOpacity
+                  onPress={() => navigate('SearchPage')}
+                >
+              {/*-----------------------搜索图标------------------------*/}
+                    <Image 
+                        source={require('../../../img/Buttons/search3.png')}
+                        style={{
+                            height:21,
+                            width:21,
+                            marginRight:0.05*ScreenWidth,
+                        }}
+                    />
+                </TouchableOpacity>
+            </View>,
+    
 
+    headerLeft:
+            <View
+                style={{flexDirection:'row'}}
+            >
+                <TouchableOpacity
+
+                >
+                    <Text
+                      style={{
+                        //color:'black',
+                        fontSize:16,
+                        marginLeft:0.03*ScreenWidth,
+                      }}
+                    >
+                      上海
+                    </Text>
+                </TouchableOpacity>
+            </View>
   };
 
 
@@ -130,50 +178,56 @@ static navigationOptions = {
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.state = {
             selectedActivities: ds.cloneWithRows([
-                {"title": "上海交大教育集团英语体验夏令营", "img":"1",starCount:5,"age":"15-20岁"},
-                {"title": "上海交大教育集团英语体验夏令营", "img":"2",starCount:2.5,"age":"15-20岁"},
-                {"title": "上海交大教育集团英语体验夏令营", "img":"3",starCount:3.5,"age":"15-20岁"},
-                {"title": "上海交大教育集团英语体验夏令营", "img":"4",starCount:4,"age":"15-20岁"},
-                {"title": "上海交大教育集团英语体验夏令营", "img":"5",starCount:3.5,"age":"15-20岁"},
-                {"title": "上海交大教育集团英语体验夏令营", "img":"6",starCount:3.5,"age":"15-20岁"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"1","location":"长宁区","age":"15-20岁"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"2","age":"15-20岁","location":"长宁区"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"3","age":"15-20岁","location":"长宁区"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"4","age":"15-20岁","location":"长宁区"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"5","age":"15-20岁","location":"长宁区"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"6","age":"15-20岁","location":"长宁区"},
             ]),
             tutorings:ds.cloneWithRows([
-                {"title": "上海交大教育集团英语体验夏令营", "img":"7",starCount:3.5,"age":"15-20岁"},
-                {"title": "上海交大教育集团英语体验夏令营", "img":"8",starCount:3.5,"age":"15-20岁"},
-                {"title": "上海交大教育集团英语体验夏令营", "img":"9",starCount:3.5,"age":"15-20岁"},
-                {"title": "上海交大教育集团英语体验夏令营", "img":"10",starCount:3.5,"age":"15-20岁"},
-                {"title": "上海交大教育集团英语体验夏令营", "img":"11",starCount:3.5,"age":"15-20岁"},
-                {"title": "上海交大教育集团英语体验夏令营", "img":"12",starCount:3.5,"age":"15-20岁"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"7","age":"15-20岁","location":"长宁区"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"8","age":"15-20岁","location":"长宁区"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"9","age":"15-20岁","location":"长宁区"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"10","age":"15-20岁","location":"长宁区"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"11","age":"15-20岁","location":"长宁区"},
+                {"title": "上海交大教育集团英语体验夏令营", "img":"12","age":"15-20岁","location":"长宁区"},
             ]),
             selectedAgencies:ds.cloneWithRows([
-                {"title": "上海交大教育集团", "img":"13",starCount:3.5},
-                {"title": "上海交大教育集团", "img":"14",starCount:3.5},
-                {"title": "上海交大教育集团", "img":"15",starCount:3.5},
-                {"title": "上海交大教育集团", "img":"16",starCount:3.5},
-                {"title": "上海交大教育集团", "img":"17",starCount:3.5},
+                {"title": "上海交大教育集团", "img":"13","location":"长宁区"},
+                {"title": "上海交大教育集团", "img":"14","location":"长宁区"},
+                {"title": "上海交大教育集团", "img":"15","location":"长宁区"},
+                {"title": "上海交大教育集团", "img":"16","location":"长宁区"},
+                {"title": "上海交大教育集团", "img":"17","location":"长宁区"},
             ]),
         };
       }
 
       renderActivitiesRow(rowData,sectionID,rowID,highlightID){
         var imgSource = activity_URLS[rowData.img]
+        const {navigate} = this.props.navigation
         return(
           <View
             style={{
               marginLeft:ScreenWidth*0.025,
+              marginTop:0,
             }}
+          >
+          <TouchableWithoutFeedback
+            onPress={() => navigate('Activity2')}
           >
             <Image 
               source={imgSource} 
               style={{
-                width:ScreenWidth*0.55,
-                height:ScreenWidth*0.55/4*3, 
-                borderRadius:10,
+                width:ScreenWidth*0.7,
+                height:ScreenWidth*0.7/4*3, 
+                borderRadius:5,
               }}
             />
+            </TouchableWithoutFeedback>
             <Text 
               numberOfLines={1}
-              style={{fontWeight: 'bold', color:'#3c3c3c',fontSize: 13,width:ScreenWidth*0.5,marginTop:5,}}
+              style={{fontWeight: 'bold', color:'#3c3c3c',fontSize: 13,width:ScreenWidth*0.7,marginTop:5,}}
             >
                 {rowData.title}
             </Text>
@@ -193,18 +247,14 @@ static navigationOptions = {
                   {rowData.age}
                 </Text>
               </Text>
-              {/*---星星---*/}
-              <StarRating
-                starStyle={{
-                  marginTop:5,
-                  //backgroundColor:'red'
-                }}
-                disabled={true}
-                maxStars={5}
-                rating={rowData.starCount}
-                //selectedStar={(rating) => this.onStarRatingPress(rating)}
-                starSize={12}
-              />  
+
+              {/*---地区---*/}
+              <Text
+                numberOfLines={1}
+                style={{color:'#707070',fontSize: 11}}
+              >
+                {rowData.location}
+              </Text>
             </View>
 
           </View>
@@ -215,23 +265,28 @@ static navigationOptions = {
 
       renderAgenciesRow(rowData,sectionID,rowID,highlightID){
         var imgSource = activity_URLS[rowData.img]
+        const {navigate} = this.props.navigation
         return(
           <View
             style={{
               marginLeft:ScreenWidth*0.025,
             }}
           >
+          <TouchableWithoutFeedback
+            onPress={() => navigate('AgencyPage')}
+          >
             <Image 
               source={imgSource}
               style={{
-                width:ScreenWidth*0.4,
-                height:ScreenWidth*0.4/9*16, 
+                width:ScreenWidth*0.6,
+                height:ScreenWidth*0.6/3*4, 
                 marginBottom:5,
                 borderRadius:5,
                 resizeMode: 'cover',
               }}
             >
             </Image>
+            </TouchableWithoutFeedback>
             <Text 
               numberOfLines={1}
               style={{fontWeight: 'bold', color:'#3c3c3c',fontSize: 13,width:ScreenWidth*0.4,}}
@@ -253,6 +308,69 @@ static navigationOptions = {
         showsVerticalScrollIndicator={false}
         style={styles.scrollViewStyle}
       >
+  
+  {/*--------------------图片轮播----------------*/}
+          <Swiper
+              height={ScreenWidth/16*9}
+              autoplay={true}
+              autoplayTimeout={2.6}
+              dot={
+                  <View style={{
+                      backgroundColor:'grey', 
+                      width: 5, 
+                      height: 5,
+                      borderRadius: 4, 
+                      marginLeft: 3, 
+                      marginRight: 3, 
+                      marginTop: 0, 
+                      marginBottom: 0,}} 
+              />}
+              activeDot={
+                  <View style={{
+                      backgroundColor: 'white', 
+                      width: 5, 
+                      height: 5, 
+                      borderRadius: 4, 
+                      marginLeft: 3, 
+                      marginRight: 3, 
+                      marginTop: 0, 
+                      marginBottom: 0,}} 
+              />}
+          >
+               <Image source={require('../../../img/Activities/a16.jpg')} style={styles.swiperPicStyle}/>
+               <Image source={require('../../../img/Activities/a17.jpg')} style={styles.swiperPicStyle}/>
+               <Image source={require('../../../img/Activities/a20.jpg')} style={styles.swiperPicStyle}/>
+          </Swiper>
+
+{/*-----------------------分类图标---------------------------*/}
+        
+      {/*--------隔离层----------*/}
+        <View
+          style={{
+            width:ScreenWidth,
+            height:8,
+            backgroundColor:'#f7f7f7',
+          }}
+        />
+
+
+        <View
+          style={{
+            width:ScreenWidth,
+            height:ScreenWidth/16*4.5,
+            backgroundColor:'white',
+          }}
+        >
+        </View>
+
+        <View
+          style={{
+            width:ScreenWidth,
+            height:8,
+            backgroundColor:'#f7f7f7',
+          }}
+        />       
+
         <View style={styles.container}>
       {/*-------------------国内精选板块--------------------*/}
           <View style={styles.bigFrameStyle}>
@@ -261,7 +379,7 @@ static navigationOptions = {
                 精选课程活动
               </Text>
               <TouchableOpacity
-                onPress={() => navigate('Activity')}
+                onPress={() => navigate('SearchPage')}
               >
                 <Text style={styles.moretitleStyle}>
                   查看更多>
@@ -271,9 +389,11 @@ static navigationOptions = {
             </View>
               <ListView
                 dataSource={this.state.selectedActivities}
-                renderRow={this.renderActivitiesRow}
+                renderRow={this.renderActivitiesRow.bind(this)}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
+                removeClippedSubviews={false}
+                //renderScrollComponent={this.renderAgenciesRow.bind(this)}
               />
           </View>
 
@@ -285,7 +405,7 @@ static navigationOptions = {
               </Text>
 
               <TouchableOpacity
-                onPress={() => navigate('Thome')}
+                onPress={() => navigate('Activity')}
               >
                 <Text style={styles.moretitleStyle}>
                   查看更多>
@@ -295,9 +415,10 @@ static navigationOptions = {
             </View>
               <ListView
                 dataSource={this.state.tutorings}
-                renderRow={this.renderActivitiesRow}
+                renderRow={this.renderActivitiesRow.bind(this)}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
+                removeClippedSubviews={false}
               />
           </View>
 
@@ -308,15 +429,20 @@ static navigationOptions = {
                 今日机构精选
               </Text>
 
-              <Text style={styles.moretitleStyle}>
-                查看更多>
-              </Text>
+              <TouchableOpacity
+                onPress={() => navigate('AgencyPage',{ agencyname: '上海交大教育集团' })}
+              >
+                <Text style={styles.moretitleStyle}>
+                  查看更多>
+                </Text>
+              </TouchableOpacity>
             </View>
               <ListView
                 dataSource={this.state.selectedAgencies}
-                renderRow={this.renderAgenciesRow}
+                renderRow={this.renderAgenciesRow.bind(this)}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
+                removeClippedSubviews={false}
               />
           </View>
 
@@ -331,39 +457,41 @@ static navigationOptions = {
 
 const TabbarNavigator = TabNavigator({
     Home: { screen: Home2 },
-    Collection: { screen: Collection },
-    Message: { screen: Message },
-    Mypage: { screen: Mypage }
+    ActivityCollection:{screen:ActivityCollection},
+    AgencyCollection:{screen:AgencyCollection},
+    Mypage: { screen: Mypage },
   }, 
   {
     initialRouteName: 'Home'
   },
   {
     tabBarOptions: {
-      activeTintColor: '#e91e63',
+      activeTintColor:'#e91e63',
       showLabel:'true',
       style:{backgroundColor: 'blue',},
     },
   }
 );
 
-const TeacherTab = TabNavigator({
-    Home: { screen: Thome },
-    Message: { screen: Tmessage },
+const CollectionTab = TabNavigator({
+    ActivityCollection: { screen: ActivityCollection },
+    AgencyCollection: { screen: AgencyCollection },
   }, 
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'ActivityCollection'
   },
 );
 
 const AppNav = StackNavigator({
   Home: { screen: TabbarNavigator },
-  AgencyPage1:{screen: AgencyPage1},
-  AgencyPage2:{screen: AgencyPage2},
+  AgencyPage:{screen: AgencyPage},
   Activity:{screen: Activity},
-  TeacherPage:{screen:TeacherPage},
-  Thome:{ screen: TeacherTab },
+  Activity2:{screen: Activity2},
+  SearchPage:{screen: SearchPage},
+  Contacts:{screen:Contacts},
 });
+
+
 
 
 //输出组件类

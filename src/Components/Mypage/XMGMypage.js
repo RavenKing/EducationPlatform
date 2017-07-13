@@ -24,289 +24,411 @@ var Dimensions = require('Dimensions');
 var ScreenWidth = Dimensions.get('window').width;
 var ScreenHeight = Dimensions.get('window').height;
 
+
 const styles = StyleSheet.create({
   
 /*-------------------框框-----------------------*/
   rootFrame:{
       flex:1,
-      backgroundColor:'white'
-  },
-  container: {
-    flex: 1,
-    //justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
+      backgroundColor:'white',
+      alignItems:'center',
   },
 
   scrollContainer: {
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     //flexDirection:'column',
   },
   scrollViewStyle:{
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     flex:1,
   },
 
 
-/*---学校信息框----*/
-  mainInfoFrame1:{
-    marginTop:20,
-    backgroundColor:'#eaf6f6',
-    borderRadius:5,
-  },
-
-
-  mainInfoRowFrame:{
-    flexDirection:'row',
-    alignItems:'center',
-    marginTop:8,
-    //marginBottom:8,
-  },
-  mainInfoLastRowFrame:{
-    flexDirection:'row',
-    alignItems:'center',
-    marginTop:8,
-    marginBottom:8,
-  },
-
-  mainInfoTextFrame:{
-    marginLeft:12,
-    flexDirection:'row',
-  },
-
-
-/*---授课信息信息框---*/
-  mainInfoFrame2:{
-    marginTop:20,
-    backgroundColor:'#f2f2f2',
-    borderRadius:5,
-  },
-  
-  contentTitleFrame:{
-    borderLeftWidth:3,
-    borderLeftColor:'#ff4081',
-    marginTop:20,
-  },
-  bigRegistryFrameStyle:{
-    //backgroundColor:'yellow',
-    width:ScreenWidth,
-    height:65,
-    alignItems:'center',
-  },
-
-  innerRegistryFrameStyle:{
-      justifyContent:'space-between',
-      alignItems:'center',
-      //backgroundColor:'red',
-      height:64,
-      flexDirection:'row',
-      width:ScreenWidth*0.85,
-  },
-
-  ratingmoneyFrameStyle:{
-      height:40,
-  },
-
-/*-------------------图片-----------------------*/
-  mainInfoIcon:{
-    width:18,
-    height:18,
-    marginLeft:8,
-  },
-
-/*-------------------文字-----------------------*/
-  mainInfoTitle:{
-    fontSize:14,
-    fontWeight:'400',
-    color:'#26a69a',
-  },
-  mainInfoContent:{
-    fontSize:14,
-    fontWeight:'200',
-    color:'#74c6bf'
-  },
-
-  mainInfoTitle2:{
-    fontSize:14,
-    fontWeight:'400',
-  },
-  mainInfoContent2:{
-    fontSize:14,
-    fontWeight:'200',
-    marginRight:5,
-  },
-
-  contentTitle:{
-    fontSize:15,
-    fontWeight:'400',
-    marginLeft:4,
-  },
-
-  contentText:{
-    fontSize:14,
-    fontWeight:'200',
-    textAlign:'justify',
-    marginTop:5,
-  },
-
-/*------------------------分割线Style-------------------------*/  
-    lineStyle:{
-        height:1,
-        width:ScreenWidth*0.9,
-        marginTop:20,
-        marginBottom:20,
-    },
-
 });
 
 
-var otherPics_URLS = [
-  require('../../../img/personalInfo/otherPics/1.jpg'),
-  require('../../../img/personalInfo/otherPics/2.jpg'),
-  require('../../../img/personalInfo/otherPics/3.jpg'),
-  require('../../../img/personalInfo/otherPics/4.jpg'),
+//信息卡颜色
+var regInfo_COLORS = [
+  '#2679bf',
+  '#2e96b3',
+  '#ed283c',
+  '#f09137',
+  '#7395c2',
+  '#df4a4c',
+  '#cd274d',
 
 ]
 
 export default class Mypage extends Component {
-  
-  constructor(props) {
-    super(props);
-    thes = this;
-    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    this.state = {
-        otherPics: ds.cloneWithRows([
-            {"img":"0"},
-            {"img":"1"},
-            {"img":"2"},
-            {"img":"3"},
-        ]),
-    };
-  }
+      
 
-   renderOtherpIcs(rowData,sectionID,rowID,highlightID){
-    var imgSource = otherPics_URLS[rowData.img]
-    return(
-      <Image 
-        source={imgSource} 
-        style={{
-          width:ScreenWidth*0.55,
-          height:ScreenWidth*0.55/4*3, 
-          borderRadius:10,
-          marginRight:ScreenWidth*0.025,
-          marginTop:5,
-        }}
-      />
-    )
-  } 
+      constructor(props) {
+        super(props);
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.state = {
+            regInfo: ds.cloneWithRows([
+                {"name": "Harvey Sheng","height":"180","weight":"78","IDNo":"310***********0618" },
+                {"name": "王小宝", "height":"173","weight":"60","IDNo":"310***********0619" },
+                {"name": "王宝宝", "height":"173","weight":"60","IDNo":"310***********0628" },
+                {"name": "王宝宝", "height":"173","weight":"60","IDNo":"310***********0628" },
+                {"name": "王宝宝", "height":"173","weight":"60","IDNo":"310***********0628" },
+                {"name": "王宝宝", "height":"173","weight":"60","IDNo":"310***********0628" },
+                {"name": "王宝宝", "height":"173","weight":"60","IDNo":"310***********0628" },
+                {"name": "王宝宝", "height":"173","weight":"60","IDNo":"310***********0628" },
+
+            ]),
+        };
+      }
+
+      renderRegInfo(rowData,sectionID,rowID,highlightID){
+        var x = (parseInt(rowID)+1)%7
+        var color = regInfo_COLORS[x]
+        console.log(x)
+        return(
+            <View
+              style={{
+                marginTop:ScreenWidth*0.01,
+                marginBottom:ScreenWidth*0.01,
+                width:ScreenWidth*0.9,
+                height:ScreenWidth*0.3,
+                backgroundColor:color,
+                borderRadius:ScreenWidth*0.28/10,
+                alignItems:'center',
+                justifyContent:'center',
+              }}
+            >
+              <View
+                style={{
+                  width:ScreenWidth*0.8,
+                  height:ScreenWidth*0.3,
+                  //backgroundColor:'#f09137',
+                  //borderRadius:ScreenWidth*0.28/10,
+                  //alignItems:'center',
+                  //justifyContent:'center',
+                  flexDirection:'row'
+                }}              
+              >
+
+
+                <View
+                  style={{
+                    width:ScreenWidth*0.8/3,
+                    height:ScreenWidth*0.3,
+                    //backgroundColor:'blue',
+                    //borderRadius:ScreenWidth*0.28/10,
+                    //alignItems:'center',
+                    //justifyContent:'center',
+                  }}              
+                >
+              {/*--------------头像---------------*/}
+                  <View
+                    style={{
+                      width:ScreenWidth*0.8/3,
+                      height:ScreenWidth*0.22,
+                      //backgroundColor:'red',
+                      alignItems:'center',
+                      justifyContent:'center',
+
+                    }}
+                  >
+                    <Image
+                      source={require('../../../img/personalInfo/face.jpg')}
+                      style={{
+                        height:0.2*ScreenWidth,
+                        width:0.2*ScreenWidth,
+                        borderRadius:0.2*ScreenWidth/2,
+                      }}
+                    />                  
+                  </View>
+
+              {/*--------------姓名---------------*/}
+                  <View
+                    style={{
+                      width:ScreenWidth*0.8/3,
+                      height:ScreenWidth*0.08,
+                      //backgroundColor:'yellow',
+                      alignItems:'center',
+                      justifyContent:'center',
+
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color:'white',
+                        fontSize:ScreenWidth*0.08/1.8,
+                        fontWeight:'bold'
+                      }}
+                      numberOfLines={1}
+                    >
+                      {rowData.name}
+                    </Text>                 
+                  </View>
+                </View>
+
+
+
+              {/*--------------身高体重身份栏---------------*/}
+                <View
+                  style={{
+                    width:ScreenWidth*0.8/3,
+                    height:ScreenWidth*0.3,
+                    //backgroundColor:'blue',
+                    //borderRadius:ScreenWidth*0.28/10,
+                    //alignItems:'center',
+                    //justifyContent:'center',
+                  }}              
+                >
+              {/*--------------身高体重---------------*/}
+                  <View
+                    style={{
+                      width:ScreenWidth*0.8/3*2,
+                      height:ScreenWidth*0.22,
+                      //backgroundColor:'red',
+                      alignItems:'center',
+                      justifyContent:'center',
+
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color:'white',
+                        fontSize:ScreenWidth*0.085,
+                        fontWeight:'100',
+                      }}
+                      numberOfLines={1}
+                    >
+                      {rowData.height}cm | {rowData.weight}kg
+                    </Text>                  
+                  </View>
+
+              {/*--------------身份证---------------*/}
+                  <View
+                    style={{
+                      width:ScreenWidth*0.8/3*2,
+                      height:ScreenWidth*0.08,
+                      //backgroundColor:'yellow',
+                      alignItems:'center',
+                      justifyContent:'center',
+
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color:'white',
+                        fontSize:ScreenWidth*0.08/3*2,
+                        fontWeight:'100',
+                      }}
+                      numberOfLines={1}
+                    >
+                      {rowData.IDNo}
+                    </Text>                 
+                  </View>
+
+                </View>
+
+              </View>
+
+            </View>
+        );
+      }
+
+
+
+
+
 
   render() {
     const { navigate } = this.props.navigation;
     return (
 
       <View style={styles.rootFrame}>
-        <ScrollView
-          style={styles.scrollViewStyle}
-          contentContainerStyle={styles.scrollContainer}
-        >
+
     
-  {/*--------------------背景图片----------------*/}
-          <Image
-            source={require('../../../img/personalInfo/mianPic.jpg')}
-            style={{
-              width: ScreenWidth,
-              height:ScreenWidth/16*9,
-            }}
-          />
+  {/*--------------------头像姓名性别----------------*/}
           <View
             style={{
-              width:ScreenWidth*0.9,
+              width: ScreenWidth,
+              height:ScreenWidth*1/2,
+              //backgroundColor:'red',
+              alignItems:'center',
             }}
-          >
-
-    {/*--------------------昵称头像信息栏----------------*/}
+          >     
             <View
               style={{
-                flexDirection:'row',
-                justifyContent:'space-between',
+                height:1/4*ScreenWidth,
+                width:ScreenWidth,
+                //backgroundColor:'blue',
                 alignItems:'center',
-                marginTop:20,
+                justifyContent:'center',
               }}
             >
-              <View
-                style={{
-                  flexDirection:'column',
+              <Image 
+                source = {require('../../../img/personalInfo/face.jpg')}
+                style = {{
+                  width:0.2*ScreenWidth,
+                  height:0.2*ScreenWidth,
+                  borderRadius:0.2*ScreenWidth/2,
                 }}
-              >
-                <Text
-                  style={{
-                    fontSize:30,
-                    fontWeight:'500',
-                    marginBottom:5
-                  }}
-                >
-                  Harvey
-                </Text>
-                
+              />
+
+            </View>  
+
                 <View
                   style={{
-                    flexDirection:'row',
+                    height:1/8*ScreenWidth,
+                    width:ScreenWidth,
                     alignItems:'center',
+                    justifyContent:'center',
+                    //backgroundColor:'red',
                   }}
                 >
                   <Text
                     style={{
-                      fontSize:13,
-                      fontWeight:'100',
+                      fontSize:30,
+                      fontWeight:'200',
                     }}
                   >
-                      90后金牛座
+                    Harvey
+                  </Text>
+                </View>
+
+
+                <View
+                  style={{
+                    height:1/8*ScreenWidth,
+                    flexDirection:'row',
+                    alignItems:'center',
+                    justifyContent:'center',
+                    //backgroundColor:'blue',
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize:20,
+                      fontWeight:'100',
+                      color:'#8d8d8d',
+                    }}
+                  >
+                      性别
                   </Text>
                   <Image 
                     source = {require('../../../img/personalInfo/male.png')}
                     style = {{
-                      width:13,
-                      height:13,
+                      width:0.06*ScreenWidth,
+                      height:0.06*ScreenWidth,
                       marginLeft:5,
                     }}
                   />
-                </View>
+                </View>                
+          </View>
 
-              </View>
 
+
+ {/*--------------------课程年龄偏好----------------*/}  
+
+          <View
+            style={{
+              height:1/6*ScreenWidth,
+              width:ScreenWidth,
+              //backgroundColor:'red',
+              alignItems:'center',
+              marginTop:ScreenWidth/20,
+            }}
+          >
+            <View
+              style={{
+                height:1/12*ScreenWidth,
+                width:ScreenWidth*0.5,
+                //backgroundColor:'blue',
+                alignItems:'center',
+                justifyContent:'center',
+                flexDirection:'row',             
+              }}
+            >
+              <Text
+                style={{
+                  fontSize:20,
+                  fontWeight:'200',
+                }}
+              >
+                课程年龄偏好
+              </Text>
+              <TouchableOpacity>
+                <Image 
+                  source={require('../../../img/Buttons/edit.png')}
+                  style={{
+                    height:0.05*ScreenWidth,
+                    width:0.05*ScreenWidth,
+                    marginLeft:10,
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View
+              style={{
+                height:1/12*ScreenWidth,
+                width:ScreenWidth*0.5,
+                //backgroundColor:'red',
+                //borderBottomWidth:3,
+                alignItems:'center',
+                justifyContent:'center',               
+              }}
+            >
+              <Text
+                style={{
+                  fontSize:20,
+                  fontWeight:'100',
+                  color:'#8d8d8d',
+                }}
+              >
+                12-15周岁
+              </Text>
+            </View>
+          </View>
+            
+{/*----------------------常用报名信息----------------------*/}
+          <View
+            style={{
+              height:1/12*ScreenWidth,
+              width:ScreenWidth*0.9,
+              marginTop:ScreenWidth/20,
+              //backgroundColor:'blue',
+              alignItems:'center',
+              justifyContent:'center',
+              flexDirection:'row',             
+            }}
+          >
+            <Text
+              style={{
+                fontSize:20,
+                fontWeight:'200',
+              }}
+            >
+              常用报名信息
+            </Text>
+
+            <TouchableOpacity>
               <Image 
-                source = {require('../../../img/personalInfo/face.jpg')}
-                style = {{
-                  width:60,
-                  height:60,
-                  borderRadius:20,
+                source={require('../../../img/Buttons/plus2.png')}
+                style={{
+                  height:0.05*ScreenWidth,
+                  width:0.05*ScreenWidth,
+                  marginLeft:10,
                 }}
               />
-            </View>
+            </TouchableOpacity>
+          </View>
+        
 
-        {/*---------------------------关注与粉丝------------------------------*/}
-            <View>
-              
-            </View>             
-
-        {/*---------------------------照片展示------------------------------*/} 
-              <View style={styles.contentTitleFrame}>
-                <Text style={styles.contentTitle}>照片展示：</Text>
-              </View>
-                <ListView
-                  dataSource={this.state.otherPics}
-                  renderRow={this.renderOtherpIcs}
-                  horizontal={true}
-                  showsHorizontalScrollIndicator={false}
-                />
-              
-              {/*------------------分割线------------------*/}
-              <Image source={require('../../../img/string.png')} style={styles.lineStyle}/>
-
-            </View>
-
-          </ScrollView>          
+          <ListView
+            dataSource={this.state.regInfo}
+            renderRow={this.renderRegInfo}
+            horizontal={false}
+            showsVerticalScrollIndicator={false}
+            removeClippedSubviews={false}
+          />
         </View>
     );
   }
