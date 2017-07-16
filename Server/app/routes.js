@@ -6,7 +6,7 @@ var Company = require('./models/Company');
 var Workflow=require('./models/WorkFlow');
 var Agency = require('./models/Agency');
 var mongoose = require('mongoose');
-
+var User = require('./models/User')
 
 
 
@@ -69,9 +69,11 @@ var mongoose = require('mongoose');
 
 //end of pilot operations
 
-//Courses
-     app.get('/api/courses', function(req, res) {
-            Course.find(req.query,function(err, pilots) {
+
+
+//users
+ app.get('/api/users', function(req, res) {
+            User.find(req.query,function(err, pilots) {
                 // if there is an error retrieving, send the error. 
                                 // nothing after res.send(err) will execute
                 if (err)
@@ -81,9 +83,9 @@ var mongoose = require('mongoose');
 
             });
 
-
-      app.post('/api/courses', function(req, res) {
-        var newOne = new Course(req.body);
+      app.post('/api/users', function(req, res) {
+        console.log(req.body);
+        var newOne = new User(req.body.data);
         newOne.save(function(err){
                 if(err)
                 {    console.log(err);
@@ -91,49 +93,14 @@ var mongoose = require('mongoose');
                 }
         })
         res.send(true);
-
         });
 
-  app.put('/api/courses',function(req,res)
-    {
-        var query = req.body.target;
-        var updatepart = req.body.updatepart;
-        Course.findOneAndUpdate(query,updatepart,function(err,data)
-            {
-               if(err)
-                            res.send(err);
-                        res.send("update success");
-            }
-            );
-    });
 
-  app.delete('/api/courses',function(req,res){
-      console.log(req.body)
-        var query = req.body.target;
-        Course.findOneAndRemove(query,function(err,data)
-            {
-               if(err)
-                            res.send(err);
-                        res.send("delete success");
-            }
-            );
-  });
-
-//end of Courses
 
 
 //company 
 
-     app.get('/api/companys', function(req, res) {
-            Company.find(req.query,function(err, pilots) {
-                // if there is an error retrieving, send the error. 
-                                // nothing after res.send(err) will execute
-                if (err)
-                    res.send(err);
-                res.json(pilots); // return all nerds in JSON format
-            });
-
-            });
+    
 
 
       app.post('/api/companys', function(req, res) {

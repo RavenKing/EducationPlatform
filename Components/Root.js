@@ -13,6 +13,8 @@ import Home from './Home/Home';
 import Login from './Login/Login';
 import About from './Message/Message';
 import Good from './Test/Test';
+import Register from './Login/Register'
+import requireAuth from './requireAuth';
 
 const store = configureStore();
 
@@ -24,6 +26,7 @@ export default class Root extends Component {
       <View style={{marginTop:25,height:640}}>
      	<Route  exact path="/" component={Login} />
         <Route path="/home" component={Home} />
+        <Route path="/register" component={Register} />
      	<Route path="/about" component={About}/>
       </View>
       </NativeRouter>

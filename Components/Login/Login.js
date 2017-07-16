@@ -11,8 +11,9 @@ import {
 } from 'react-native';
 import {Redirect,withRouter} from "react-router-native";
 import {connect} from 'react-redux';
-import {fetchAgency} from '../actions/AgencyAction';
-
+import {LoginUser} from '../actions/AgencyAction';
+import {setAuthToken} from '../actions/AuthAction';
+import md5 from 'md5';
 const Form = t.form.Form;
 
 
@@ -20,50 +21,71 @@ const Form = t.form.Form;
 
  class Message extends Component {
 
-  login(){
+  onPress(){
 
+    //set Auth
+          var value= this.refs.form.getValue();
+                  const valueType={
+                    user_name:value.user_name,
+                    password:md5(value.password)
+                  }
+                this.props.dispatch(setAuthToken(valueType));
+//jump to / 
+        setTimeout(function(){
+          console.log(this.props)
+          if(this.props.auth) 
+          {
+            const {token} = this.props.auth;
+            console.log(token); 
+            if(token.authorized)
+              {this.props.history.push('/home')}
+
+          }     
+        }.bind(this),1000);
 
 
   }
 
-
   render() {
     const Agency = t.struct({
-      name:t.String,
+      user_name:t.String,
       password:t.String,
     })
     const options = {auto:'placeholders',
     fields:{
-      name:{placeholder:'very shit'},
+      user_name:{placeholder:'shit your name'},
       password:{secureTextEntry:true}   // t comb fields set each configuration for the field
     }
   } ;
 
-    console.log(this.props);
      const ShitButton =      
      (      
-      <TouchableHighlight style={styles.button} underlayColor='#99d9f4' onPress={
-                ()=> {
-                  this.props.dispatch(fetchAgency());
-                 this.props.history.push("/home")
-                  }
-            }>
-    
+      <TouchableHighlight style={styles.button} underlayColor='#99d9f4' onPress={this.onPress.bind(this)}> 
                 <Text style={styles.buttonText}>登陆</Text>
             </TouchableHighlight>
       )
+     const RegisterButton =
+     (
+            <TouchableHighlight style={styles.button} underlayColor='#99d9f4' onPress={
+                ()=>
+               this.props.history.push("/register")
+            }>
+    
+                <Text style={styles.buttonText}>注册</Text>
+            </TouchableHighlight>)
 
     return (
       <View style={styles.container}>
         <Text >
-          Tgkl;s
-        </Text>
+       我要遭重
+          </Text>
        <Form
           ref="form"
           type={Agency}
           options={options}
         />
         {ShitButton}
+        {RegisterButton}
       </View>
     )
     ;
@@ -104,7 +126,8 @@ var styles = StyleSheet.create({
 function select(store)
 {
 return {  
-    Agencys:store.Agency
+    Agencys:store.Agency,
+    auth:store.Auth
   }
 }
 

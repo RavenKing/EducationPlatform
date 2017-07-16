@@ -11,6 +11,7 @@ import TabNavigator from 'react-native-tab-navigator';
 
 import HomePage from "./Homeview";
 import Icon from 'react-native-vector-icons/Ionicons';
+import MainView from "./MainView";
 
 const HOME = 'home';
 
@@ -53,7 +54,7 @@ export default class MainScreen extends Component {
             <View style={{flex: 1}}>
                 <TabNavigator hidesTabTouch={true} tabBarStyle={styles.tab}>
                     {this._renderTabItem(HOME, <HomePage />)}
-                    {this._renderTabItem(CATEGORY, <HomePage />)}
+                    {this._renderTabItem(CATEGORY, <MainView />)}
                     {this._renderTabItem(FAXIAN, <HomePage />)}
                     {this._renderTabItem(CART, <HomePage />)}
                 </TabNavigator>

@@ -30,6 +30,17 @@ export default function loginIn(state = initialState, action) {
         isSuccess: action.isSuccess,
         user: action.user
       })
+
+      case "LOGIN":
+      {
+
+        return Object.assign({},state,
+        {
+          user:action.payload
+
+        })
+      }
+
     default:
       return state;
   }

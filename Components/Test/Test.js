@@ -60,6 +60,7 @@ const Form = t.form.Form;
           options={options}
         />
         {ShitButton}
+        {RegisterButton}
       </View>
     )
     ;
