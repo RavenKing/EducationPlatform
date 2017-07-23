@@ -7,6 +7,7 @@ var Workflow = require('./models/WorkFlow');
 var Agency = require('./models/Agency');
 var mongoose = require('mongoose');
 var User = require('./models/User')
+var Activity = require('./models/Activity');
 
 
 
@@ -38,7 +39,17 @@ module.exports = function(app) {
             }
         })
         res.send(true);
-
+    });
+    app.post('/api/activities', function(req, res) {
+        console.log(req.body)
+        var newOne = new Activity(req.body);
+        newOne.save(function(err) {
+            if (err) {
+                console.log(err);
+                res.send(false);
+            }
+        })
+        res.send(true);
     });
 
     app.put('/api/pilots', function(req, res) {
