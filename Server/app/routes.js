@@ -15,9 +15,6 @@ module.exports = function(app) {
 
     // pilots operations
     app.get('/api/agencys', function(req, res) {
-
-        console.log(req.query);
-
         Agency.find(req.query, function(err, pilots) {
             // if there is an error retrieving, send the error. 
             // nothing after res.send(err) will execute
@@ -45,12 +42,25 @@ module.exports = function(app) {
         var newOne = new Activity(req.body);
         newOne.save(function(err) {
             if (err) {
-                console.log(err);
                 res.send(false);
             }
         })
         res.send(true);
     });
+    app.get('/api/activities', function(req, res) {
+      
+        Activity.find(req.query, function(err, pilots) {
+            // if there is an error retrieving, send the error. 
+            // nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+            res.json(pilots); // return all nerds in JSON format
+        });
+
+
+
+    });
+
 
     app.put('/api/pilots', function(req, res) {
         console.log(req.body)
