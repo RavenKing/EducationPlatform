@@ -26,6 +26,10 @@ module.exports = function(app) {
     });
 
 
+
+
+
+
     app.post('/api/agencys', function(req, res) {
         console.log(req.body)
         var newOne = new Agency(req.body);
@@ -36,6 +40,17 @@ module.exports = function(app) {
             }
         })
         res.send(true);
+    });
+    app.put('/api/agencys', function(req, res) {
+        
+
+         var query = req.body.target;
+        var updatepart = req.body.updatePart;
+        Agency.findOneAndUpdate(query, updatepart, function(err, data) {
+            if (err)
+                res.send(err);
+            res.send("update success");
+        });
     });
     app.post('/api/activities', function(req, res) {
         console.log(req.body)
@@ -60,6 +75,20 @@ module.exports = function(app) {
 
 
     });
+
+     app.delete('/api/activities', function(req, res) {
+        console.log(req.body)
+        var query = req.body.target;
+        Workflow.findOneAndRemove(query, function(err, data) {
+            if (err)
+                res.send(err);
+            res.send("delete success");
+        });
+
+    });
+
+
+
 
 
     app.put('/api/pilots', function(req, res) {

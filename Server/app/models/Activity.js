@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 
 
 var Activity = new Schema({
-    agency: String,
+    activity_id:String,
+    agency_id: String,
     title:String,
     target_age:String,
     contacter:String,

@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 var Agency = new Schema({
     agency_id: String,
+    user_id:Number,//phone number
     agency_name:String,
     description:String,
     creation_date:{type:Date,default:Date.now},
